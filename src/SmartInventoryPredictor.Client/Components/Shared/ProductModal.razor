@@ -1,0 +1,115 @@
+﻿@if (IsVisible)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Title</h5>
+                    <button type="button" class="btn-close" @onclick="Cancel"></button>
+                </div>
+                <div class="modal-body">
+                    @if (Mode == "StockUpdate")
+                    {
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Product</label>
+                                <input type="text" class="form-control" value="@Product.Name" readonly>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">SKU</label>
+                                <input type="text" class="form-control" value="@Product.SKU" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Current Stock</label>
+                                <input type="text" class="form-control" value="@_originalStock" readonly>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Minimum Stock</label>
+                                <input type="text" class="form-control" value="@Product.MinimumStock" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">New Stock Amount</label>
+                            <input type="number" class="form-control" @bind="Product.CurrentStock" min="0">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" @bind="Product.Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">SKU</label>
+                            <input type="text" class="form-control" @bind="Product.SKU" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <input type="text" class="form-control" @bind="Product.Category" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Unit Price</label>
+                            <input type="number" step="0.01" class="form-control" @bind="Product.UnitPrice" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Current Stock</label>
+                            <input type="number" class="form-control" @bind="Product.CurrentStock" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Minimum Stock</label>
+                            <input type="number" class="form-control" @bind="Product.MinimumStock" required>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+                    <button type="button" class="btn btn-primary" @onclick="Save" disabled="@_isSaving">
+                        @if (_isSaving)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2"></span>
+                        }
+                        @(Mode == "StockUpdate" ? "Update Stock" : Product.Id > 0 ? "Update" : "Create")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public ProductDto Product { get; set; } = new();
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public string Title { get; set; } = "Product";
+    [Parameter] public string Mode { get; set; } = "Edit"; // Edit, Create, StockUpdate
+    [Parameter] public EventCallback<ProductDto> OnSave { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+
+    private bool _isSaving = false;
+    private int _originalStock;
+
+    protected override void OnParametersSet()
+    {
+        if (Mode == "StockUpdate")
+        {
+            _originalStock = Product.CurrentStock;
+        }
+    }
+
+    private async Task Save()
+    {
+        _isSaving = true;
+        StateHasChanged();
+
+        await OnSave.InvokeAsync(Product);
+
+        _isSaving = false;
+        StateHasChanged();
+    }
+
+    private async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+}

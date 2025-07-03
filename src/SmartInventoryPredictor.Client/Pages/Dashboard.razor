@@ -1,0 +1,553 @@
+﻿@page "/"
+@inject ApiService ApiService
+@inject SignalRService SignalR
+@inject IJSRuntime JSRuntime
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h2 mb-1">Dashboard</h1>
+            <p class="text-muted">Welcome back! Here's what's happening with your inventory.</p>
+        </div>
+        <div class="col-auto">
+            <div class="btn-group">
+                <button class="btn btn-outline-secondary">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+                <button class="btn btn-primary" @onclick="RefreshData">
+                    <i class="fas fa-sync-alt @(_isLoading ? "fa-spin" : "")"></i>
+                    Refresh
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @if (_dashboardData != null)
+    {
+        <!-- KPI Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Total Products</h6>
+                                <h2 class="text-primary mb-2">@_dashboardData.TotalProducts.ToString("N0")</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                    <small class="text-success">+12% from last month</small>
+                                </div>
+                            </div>
+                            <div class="bg-primary-subtle p-3 rounded">
+                                <i class="fas fa-boxes text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Low Stock Alerts</h6>
+                                <h2 class="text-warning mb-2">@_dashboardData.LowStockAlerts</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-exclamation-triangle text-warning me-1"></i>
+                                    <small class="text-warning">Needs attention</small>
+                                </div>
+                            </div>
+                            <div class="bg-warning-subtle p-3 rounded">
+                                <i class="fas fa-exclamation-triangle text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Inventory Value</h6>
+                                <h2 class="text-success mb-2">@_dashboardData.TotalInventoryValue.ToString("C0")</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                    <small class="text-success">+8% this quarter</small>
+                                </div>
+                            </div>
+                            <div class="bg-success-subtle p-3 rounded">
+                                <i class="fas fa-dollar-sign text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Monthly Revenue</h6>
+                                <h2 class="text-info mb-2">@_dashboardData.MonthlyRevenue.ToString("C0")</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                    <small class="text-success">+15% vs target</small>
+                                </div>
+                            </div>
+                            <div class="bg-info-subtle p-3 rounded">
+                                <i class="fas fa-chart-line text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row mb-4">
+            <!-- Revenue Chart -->
+            <div class="col-lg-8 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-1">Revenue Trends</h5>
+                                <p class="card-text text-muted mb-0">Last 30 days performance</p>
+                            </div>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-secondary">7D</button>
+                                <button class="btn btn-primary">30D</button>
+                                <button class="btn btn-outline-secondary">90D</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Distribution -->
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-1">Stock by Category</h5>
+                        <p class="card-text text-muted mb-0">Current distribution</p>
+                    </div>
+                    <div class="card-body">
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Tables -->
+        <div class="row">
+            <!-- Top Products -->
+            <div class="col-xl-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-1">Top Products</h5>
+                        <p class="card-text text-muted mb-0">Best performers this month</p>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Revenue</th>
+                                        <th>Units</th>
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in _dashboardData.TopProducts.Take(5))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-primary-subtle p-2 rounded me-3">
+                                                        <i class="fas fa-box text-primary"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-semibold">@product.Name</div>
+                                                        <small class="text-muted">SKU: #@(Random.Shared.Next(1000, 9999))</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fw-semibold">@product.Revenue.ToString("C")</td>
+                                            <td>@product.TotalSold.ToString("N0")</td>
+                                            <td>
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-arrow-up me-1"></i>
+                                                    +@(Random.Shared.Next(5, 25))%
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="col-xl-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-1">Recent Activity</h5>
+                        <p class="card-text text-muted mb-0">Latest inventory changes</p>
+                    </div>
+                    <div class="card-body">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <div class="d-flex align-items-center mb-3 @(i == 4 ? "" : "border-bottom pb-3")">
+                                <div class="bg-@(GetRandomColor())-subtle p-2 rounded me-3">
+                                    <i class="fas fa-@(GetRandomIcon()) text-@(GetRandomColor())"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold">Stock updated for Product @(i + 1)</div>
+                                    <small class="text-muted">@(Random.Shared.Next(1, 60)) minutes ago</small>
+                                </div>
+                                <span class="badge bg-@(GetRandomBadgeType())">
+                                    @(GetRandomAction())
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (_isLoading)
+    {
+        <LoadingState />
+    }
+    else
+    {
+        <!-- Demo Data when API is not available -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Total Products</h6>
+                                <h2 class="text-primary mb-2">1,247</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                    <small class="text-success">+12% from last month</small>
+                                </div>
+                            </div>
+                            <div class="bg-primary-subtle p-3 rounded">
+                                <i class="fas fa-boxes text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Low Stock Alerts</h6>
+                                <h2 class="text-warning mb-2">23</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-exclamation-triangle text-warning me-1"></i>
+                                    <small class="text-warning">Needs attention</small>
+                                </div>
+                            </div>
+                            <div class="bg-warning-subtle p-3 rounded">
+                                <i class="fas fa-exclamation-triangle text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Inventory Value</h6>
+                                <h2 class="text-success mb-2">$2.4M</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                    <small class="text-success">+8% this quarter</small>
+                                </div>
+                            </div>
+                            <div class="bg-success-subtle p-3 rounded">
+                                <i class="fas fa-dollar-sign text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="card-subtitle mb-2 text-muted">Monthly Revenue</h6>
+                                <h2 class="text-info mb-2">$847K</h2>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                    <small class="text-success">+15% vs target</small>
+                                </div>
+                            </div>
+                            <div class="bg-info-subtle p-3 rounded">
+                                <i class="fas fa-chart-line text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Charts -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-1">Revenue Trends</h5>
+                                <p class="card-text text-muted mb-0">Last 30 days performance</p>
+                            </div>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-secondary">7D</button>
+                                <button class="btn btn-primary">30D</button>
+                                <button class="btn btn-outline-secondary">90D</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="demoRevenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-1">Stock by Category</h5>
+                        <p class="card-text text-muted mb-0">Current distribution</p>
+                    </div>
+                    <div class="card-body">
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="demoCategoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private DashboardDto? _dashboardData;
+    private bool _isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDashboardData();
+        await CreateDemoCharts();
+
+        try
+        {
+            await SignalR.StartAsync("http://localhost:7025/inventoryHub");
+            SignalR.OnStockUpdated(OnStockUpdated);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"SignalR connection failed: {ex.Message}");
+        }
+    }
+
+    private string GetRandomColor() => new[] { "primary", "success", "warning", "info", "secondary" }[Random.Shared.Next(5)];
+    private string GetRandomIcon() => new[] { "plus", "edit", "minus", "sync", "check" }[Random.Shared.Next(5)];
+    private string GetRandomBadgeType() => new[] { "success", "warning", "primary" }[Random.Shared.Next(3)];
+    private string GetRandomAction() => new[] { "Added", "Updated", "Removed", "Synced", "Verified" }[Random.Shared.Next(5)];
+
+    private IJSObjectReference? _revenueChart;
+    private IJSObjectReference? _categoryChart;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CreateDemoCharts();
+        }
+    }
+
+    private async Task LoadDashboardData()
+    {
+        _isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            _dashboardData = await ApiService.GetDashboardAsync();
+        }
+        catch
+        {
+            // If API fails, we'll show demo data
+            _dashboardData = null;
+        }
+
+        _isLoading = false;
+        StateHasChanged();
+    }
+
+    private async Task RefreshData()
+    {
+        await LoadDashboardData();
+        await CreateDemoCharts();
+    }
+
+    private async Task CreateDemoCharts()
+    {
+        try
+        {
+            // Demo Revenue Chart
+            var revenueConfig = new
+            {
+                type = "line",
+                data = new
+                {
+                    labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" },
+                    datasets = new[]
+                    {
+                        new
+                        {
+                            label = "Revenue",
+                            data = new[] { 65000, 72000, 68000, 85000, 79000, 92000, 88000, 96000, 89000, 101000, 98000, 105000 },
+                            borderColor = "#2563eb",
+                            backgroundColor = "rgba(37, 99, 235, 0.1)",
+                            tension = 0.4,
+                            fill = true,
+                            borderWidth = 2
+                        }
+                    }
+                },
+                options = new
+                {
+                    responsive = true,
+                    maintainAspectRatio = false,
+                    plugins = new
+                    {
+                        legend = new { display = false }
+                    },
+                    scales = new
+                    {
+                        y = new
+                        {
+                            beginAtZero = true,
+                            grid = new { color = "#f3f4f6" },
+                            ticks = new
+                            {
+                                callback = "function(value) { return '$' + (value/1000) + 'K'; }"
+                            }
+                        },
+                        x = new
+                        {
+                            grid = new { display = false }
+                        }
+                    }
+                }
+            };
+
+            var chartId = _dashboardData != null ? "revenueChart" : "demoRevenueChart";
+            _revenueChart = await JSRuntime.InvokeAsync<IJSObjectReference>("chartHelpers.createChart", chartId, revenueConfig);
+
+            // Demo Category Chart
+            var categoryConfig = new
+            {
+                type = "doughnut",
+                data = new
+                {
+                    labels = new[] { "Electronics", "Clothing", "Books", "Home & Garden", "Sports" },
+                    datasets = new[]
+                    {
+                        new
+                        {
+                            data = new[] { 350, 280, 150, 120, 90 },
+                            backgroundColor = new[]
+                            {
+                                "#2563eb",
+                                "#6b7280",
+                                "#10b981",
+                                "#f59e0b",
+                                "#ef4444"
+                            },
+                            borderWidth = 0
+                        }
+                    }
+                },
+                options = new
+                {
+                    responsive = true,
+                    maintainAspectRatio = false,
+                    plugins = new
+                    {
+                        legend = new
+                        {
+                            position = "bottom",
+                            labels = new { padding = 20 }
+                        }
+                    }
+                }
+            };
+
+            var categoryChartId = _dashboardData != null ? "categoryChart" : "demoCategoryChart";
+            _categoryChart = await JSRuntime.InvokeAsync<IJSObjectReference>("chartHelpers.createChart", categoryChartId, categoryConfig);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating charts: {ex.Message}");
+        }
+    }
+
+    private void OnStockUpdated(object data)
+    {
+        InvokeAsync(async () =>
+        {
+            await RefreshData();
+            StateHasChanged();
+        });
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_revenueChart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _revenueChart);
+            await _revenueChart.DisposeAsync();
+        }
+
+        if (_categoryChart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _categoryChart);
+            await _categoryChart.DisposeAsync();
+        }
+
+        await SignalR.DisposeAsync();
+    }
+}

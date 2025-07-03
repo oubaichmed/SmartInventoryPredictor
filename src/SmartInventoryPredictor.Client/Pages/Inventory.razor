@@ -1,0 +1,374 @@
+﻿@page "/inventory"
+@using SmartInventoryPredictor.Client.Components.Shared
+@inject ApiService ApiService
+@inject SignalRService SignalR
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Inventory Management - Smart Inventory Predictor</PageTitle>
+
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="h2 mb-0">Inventory Management</h1>
+        <p class="text-muted">Monitor and manage stock levels in real-time</p>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-warning" @onclick="RefreshData" disabled="@_isLoading">
+            @if (_isLoading)
+            {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+            }
+            else
+            {
+                <i class="fas fa-sync-alt me-2"></i>
+            }
+            Refresh
+        </button>
+    </div>
+</div>
+
+<!-- Low Stock Alerts -->
+@if (_lowStockProducts.Any())
+{
+    <AlertToast Visible="true" Type="warning" 
+                Message="@($"{_lowStockProducts.Count} products need restocking")" />
+}
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quick Stock Update</h5>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <select class="form-select form-select-sm" @bind="_selectedProductForUpdate">
+                            <option value="0">Select Product</option>
+                            @foreach (var product in _allProducts)
+                            {
+                                <option value="@product.Id">@product.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" class="form-control form-control-sm" @bind="_newStockAmount" placeholder="New stock">
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary btn-sm w-100" @onclick="QuickUpdateStock" disabled="@(_selectedProductForUpdate == 0 || _isUpdatingStock)">
+                            @if (_isUpdatingStock)
+                            {
+                                <span class="spinner-border spinner-border-sm"></span>
+                            }
+                            else
+                            {
+                                <text>Update</text>
+                            }
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Stock Statistics</h5>
+                <div class="row text-center">
+                    <div class="col-4">
+                        <div class="h5 text-danger">@_lowStockProducts.Count</div>
+                        <small class="text-muted">Low Stock</small>
+                    </div>
+                    <div class="col-4">
+                        <div class="h5 text-warning">@_mediumStockProducts.Count</div>
+                        <small class="text-muted">Medium Stock</small>
+                    </div>
+                    <div class="col-4">
+                        <div class="h5 text-success">@_highStockProducts.Count</div>
+                        <small class="text-muted">High Stock</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inventory Table -->
+@if (_isLoading)
+{
+    <LoadingSpinner Message="Loading inventory data..." />
+}
+else if (_allProducts.Any())
+{
+    <div class="card">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h5 class="card-title mb-0">Current Inventory</h5>
+                </div>
+                <div class="col-auto">
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn @(_currentView == "all" ? "btn-primary" : "btn-outline-primary")" @onclick="@(() => SetView("all"))">
+                            All (@_allProducts.Count)
+                        </button>
+                        <button class="btn @(_currentView == "low" ? "btn-danger" : "btn-outline-danger")" @onclick="@(() => SetView("low"))">
+                            Low Stock (@_lowStockProducts.Count)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Current Stock</th>
+                            <th>Minimum Stock</th>
+                            <th>Stock Level</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in GetFilteredProducts())
+                        {
+                            <tr class="@GetRowClass(product)">
+                                <td>
+                                    <div>
+                                        <strong>@product.Name</strong>
+                                        <br>
+                                        <small class="text-muted">@product.SKU</small>
+                                    </div>
+                                </td>
+                                <td>@product.Category</td>
+                                <td>
+                                    <span class="fw-bold fs-5">@product.CurrentStock</span>
+                                </td>
+                                <td>@product.MinimumStock</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="progress me-2" style="width: 100px; height: 8px;">
+                                            <div class="progress-bar @GetProgressBarClass(product)" 
+                                                 style="width: @GetStockPercentage(product)%"></div>
+                                        </div>
+                                        <span class="badge @GetStockBadgeClass(product.StockStatus) ms-2">
+                                            @product.StockStatus
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>@((product.CurrentStock * product.UnitPrice).ToString("C"))</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" @onclick="() => ShowStockUpdateModal(product)" title="Update Stock">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Stock Update Modal -->
+@if (_showStockModal && _selectedProduct != null)
+{
+    <ProductModal Product="_selectedProduct" 
+                  IsVisible="_showStockModal"
+                  OnSave="HandleStockUpdate"
+                  OnCancel="HideStockModal"
+                  Title="Update Stock"
+                  Mode="StockUpdate" />
+}
+
+<AlertToast Visible="_showToast" Type="@_toastType" Message="@_toastMessage" />
+
+@code {
+    private List<ProductDto> _allProducts = new();
+    private List<ProductDto> _lowStockProducts = new();
+    private List<ProductDto> _mediumStockProducts = new();
+    private List<ProductDto> _highStockProducts = new();
+    
+    private bool _isLoading = true;
+    private bool _isUpdatingStock = false;
+    private bool _showStockModal = false;
+    private string _currentView = "all";
+    
+    private int _selectedProductForUpdate = 0;
+    private int _newStockAmount = 0;
+    private ProductDto? _selectedProduct;
+    
+    // Toast properties
+    private bool _showToast = false;
+    private string _toastType = "info";
+    private string _toastMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadInventoryData();
+        
+        // Setup SignalR
+        try
+        {
+            await SignalR.StartAsync("https://localhost:7025/inventoryHub");
+            SignalR.OnStockUpdated(OnStockUpdated);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"SignalR connection failed: {ex.Message}");
+        }
+    }
+
+    private async Task LoadInventoryData()
+    {
+        _isLoading = true;
+        StateHasChanged();
+
+        _allProducts = await ApiService.GetProductsAsync();
+        CategorizeProducts();
+
+        _isLoading = false;
+        StateHasChanged();
+    }
+
+    private void CategorizeProducts()
+    {
+        _lowStockProducts = _allProducts.Where(p => p.CurrentStock <= p.MinimumStock).ToList();
+        _mediumStockProducts = _allProducts.Where(p => p.CurrentStock > p.MinimumStock && p.CurrentStock <= p.MinimumStock * 2).ToList();
+        _highStockProducts = _allProducts.Where(p => p.CurrentStock > p.MinimumStock * 2).ToList();
+    }
+
+    private async Task RefreshData()
+    {
+        await LoadInventoryData();
+    }
+
+    private void SetView(string view)
+    {
+        _currentView = view;
+        StateHasChanged();
+    }
+
+    private List<ProductDto> GetFilteredProducts()
+    {
+        return _currentView switch
+        {
+            "low" => _lowStockProducts,
+            _ => _allProducts
+        };
+    }
+
+    private async Task QuickUpdateStock()
+    {
+        if (_selectedProductForUpdate == 0 || _newStockAmount < 0) return;
+
+        _isUpdatingStock = true;
+        StateHasChanged();
+
+        var success = await ApiService.UpdateStockAsync(_selectedProductForUpdate, _newStockAmount);
+        
+        if (success)
+        {
+            await LoadInventoryData();
+            _selectedProductForUpdate = 0;
+            _newStockAmount = 0;
+            ShowToast("Stock updated successfully!", "success");
+        }
+        else
+        {
+            ShowToast("Failed to update stock!", "error");
+        }
+
+        _isUpdatingStock = false;
+        StateHasChanged();
+    }
+
+    private void ShowStockUpdateModal(ProductDto product)
+    {
+        _selectedProduct = product;
+        _showStockModal = true;
+        StateHasChanged();
+    }
+
+    private void HideStockModal()
+    {
+        _showStockModal = false;
+        _selectedProduct = null;
+        StateHasChanged();
+    }
+
+    private async Task HandleStockUpdate(ProductDto product)
+    {
+        var success = await ApiService.UpdateStockAsync(product.Id, product.CurrentStock);
+        
+        if (success)
+        {
+            HideStockModal();
+            await LoadInventoryData();
+            ShowToast($"Stock updated for {product.Name}!", "success");
+        }
+        else
+        {
+            ShowToast("Failed to update stock!", "error");
+        }
+    }
+
+    private void OnStockUpdated(object data)
+    {
+        InvokeAsync(async () =>
+        {
+            await LoadInventoryData();
+            StateHasChanged();
+        });
+    }
+
+    private string GetRowClass(ProductDto product)
+    {
+        if (product.CurrentStock == 0) return "table-danger";
+        if (product.CurrentStock <= product.MinimumStock) return "table-warning";
+        return "";
+    }
+
+    private string GetStockBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Low" => "bg-danger",
+            "Medium" => "bg-warning text-dark",
+            "High" => "bg-success",
+            _ => "bg-secondary"
+        };
+    }
+
+    private string GetProgressBarClass(ProductDto product)
+    {
+        if (product.CurrentStock == 0) return "bg-danger";
+        if (product.CurrentStock <= product.MinimumStock) return "bg-warning";
+        if (product.CurrentStock <= product.MinimumStock * 2) return "bg-info";
+        return "bg-success";
+    }
+
+    private double GetStockPercentage(ProductDto product)
+    {
+        if (product.MinimumStock == 0) return 100;
+        var maxStock = product.MinimumStock * 3;
+        return Math.Min(100, (double)product.CurrentStock / maxStock * 100);
+    }
+
+    private void ShowToast(string message, string type)
+    {
+        _toastMessage = message;
+        _toastType = type;
+        _showToast = true;
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await SignalR.DisposeAsync();
+    }
+}

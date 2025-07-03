@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "ALL",
+    "Projects": [
+      {
+        "Path": "src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

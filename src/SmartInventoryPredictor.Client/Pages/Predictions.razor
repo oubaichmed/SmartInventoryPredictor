@@ -1,0 +1,505 @@
+﻿@page "/predictions"
+@inject ApiService ApiService
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Predictions - Smart Inventory Predictor</PageTitle>
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h2 mb-1">Demand Predictions</h1>
+            <p class="text-muted">AI-powered inventory forecasting for the next 30 days</p>
+        </div>
+        <div class="col-auto">
+            <div class="btn-group">
+                <button class="btn btn-primary" @onclick="GeneratePredictions" disabled="@_isGenerating">
+                    @if (_isGenerating)
+                    {
+                        <span class="spinner-border spinner-border-sm me-2"></span>
+                    }
+                    else
+                    {
+                        <i class="fas fa-magic me-2"></i>
+                    }
+                    Generate Predictions
+                </button>
+                <button class="btn btn-outline-primary" @onclick="ExportPredictions" disabled="@(!_predictions.Any())">
+                    <i class="fas fa-download me-2"></i>
+                    Export CSV
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @if (_isGenerating)
+    {
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
+                <h5>Generating AI Predictions</h5>
+                <p class="text-muted">This may take a few minutes as we analyze historical data and train the model...</p>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (_predictions.Any())
+    {
+        <!-- Enhanced Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="card-body text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    <h6 class="card-subtitle mb-0 text-white-50">Total Predictions</h6>
+                                </div>
+                                <h2 class="fw-bold mb-2">@_predictions.Count.ToString("N0")</h2>
+                                <small class="text-white-75">
+                                    <i class="fas fa-calendar-alt me-1"></i>
+                                    Next 30 days
+                                </small>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded-circle">
+                                <i class="fas fa-chart-line fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #06d6a0 0%, #118ab2 100%);">
+                    <div class="card-body text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <h6 class="card-subtitle mb-0 text-white-50">High Confidence</h6>
+                                </div>
+                                <h2 class="fw-bold mb-2">@_predictions.Count(p => p.Confidence > 0.8f).ToString("N0")</h2>
+                                <small class="text-white-75">
+                                    <i class="fas fa-percentage me-1"></i>
+                                    @((_predictions.Any() ? (double)_predictions.Count(p => p.Confidence > 0.8f) / _predictions.Count * 100 : 0).ToString("F0"))% of total
+                                </small>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded-circle">
+                                <i class="fas fa-check-circle fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #ffd60a 0%, #f77f00 100%);">
+                    <div class="card-body text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-star me-2"></i>
+                                    <h6 class="card-subtitle mb-0 text-white-50">Category A Items</h6>
+                                </div>
+                                <h2 class="fw-bold mb-2">@_predictions.Count(p => p.ABCCategory == "A").ToString("N0")</h2>
+                                <small class="text-white-75">
+                                    <i class="fas fa-trophy me-1"></i>
+                                    High priority items
+                                </small>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded-circle">
+                                <i class="fas fa-star fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+                    <div class="card-body text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-chart-bar me-2"></i>
+                                    <h6 class="card-subtitle mb-0 text-white-50">Avg. Daily Demand</h6>
+                                </div>
+                                <h2 class="fw-bold mb-2">@(_predictions.Any() ? _predictions.Average(p => p.PredictedDemand).ToString("F1") : "0")</h2>
+                                <small class="text-white-75">
+                                    <i class="fas fa-trending-up me-1"></i>
+                                    Units per day
+                                </small>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded-circle">
+                                <i class="fas fa-chart-bar fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Selection -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <select class="form-select" @bind="_selectedProductId" @bind:after="OnProductSelectionChanged">
+                    <option value="0">Select a product to view detailed predictions</option>
+                    @foreach (var productGroup in _predictions.GroupBy(p => p.ProductId))
+                    {
+                        <option value="@productGroup.Key">Product ID: @productGroup.Key</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="showChart" @bind="_showChart" @bind:after="OnChartToggle">
+                    <label class="form-check-label" for="showChart">
+                        Show Prediction Chart
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        @if (_selectedProductId > 0 && _productPredictions.Any())
+        {
+            <div class="row">
+                @if (_showChart)
+                {
+                    <div class="col-lg-8 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">30-Day Demand Forecast</h5>
+                            </div>
+                            <div class="card-body">
+                                <div style="position: relative; height: 300px;">
+                                    <canvas id="predictionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Prediction Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="h4 text-primary">@_productPredictions.Sum(p => p.PredictedDemand).ToString("F0")</div>
+                                        <small class="text-muted">Total 30-Day Demand</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="h4 text-success">@((_productPredictions.Average(p => p.Confidence) * 100).ToString("F1"))%</div>
+                                        <small class="text-muted">Avg. Confidence</small>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <span class="badge bg-@(GetCategoryBadgeClass(_productPredictions.First().ABCCategory)) fs-6">
+                                        Category @_productPredictions.First().ABCCategory
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Prediction Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="h4 text-primary">@_productPredictions.Sum(p => p.PredictedDemand).ToString("F0")</div>
+                                        <small class="text-muted">Total 30-Day Demand</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="h4 text-success">@((_productPredictions.Average(p => p.Confidence) * 100).ToString("F1"))%</div>
+                                        <small class="text-muted">Avg. Confidence</small>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <span class="badge bg-@(GetCategoryBadgeClass(_productPredictions.First().ABCCategory)) fs-6">
+                                        Category @_productPredictions.First().ABCCategory
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            
+                <!-- Detailed Predictions Table -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Daily Predictions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Predicted Demand</th>
+                                            <th>Confidence</th>
+                                            <th>Day of Week</th>
+                                            <th>Confidence Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var prediction in _productPredictions.OrderBy(p => p.PredictedDate))
+                                        {
+                                            <tr>
+                                                <td>@prediction.PredictedDate.ToString("MMM dd, yyyy")</td>
+                                                <td class="fw-bold">@prediction.PredictedDemand.ToString("F1")</td>
+                                                <td>@((prediction.Confidence * 100).ToString("F1"))%</td>
+                                                <td>@prediction.PredictedDate.DayOfWeek</td>
+                                                <td>
+                                                    @if (prediction.Confidence >= 0.8f)
+                                                    {
+                                                        <span class="badge bg-success">High</span>
+                                                    }
+                                                    else if (prediction.Confidence >= 0.6f)
+                                                    {
+                                                        <span class="badge bg-warning">Medium</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">Low</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            No predictions available. Click "Generate Predictions" to create AI-powered demand forecasts.
+        </div>
+    }
+</div>
+
+@code {
+    private List<PredictionResult> _predictions = new();
+    private List<PredictionResult> _productPredictions = new();
+    private bool _isGenerating = false;
+    private int _selectedProductId = 0;
+    private bool _showChart = true;
+    private IJSObjectReference? _predictionChart;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadExistingPredictions();
+    }
+
+    private async Task LoadExistingPredictions()
+    {
+        try
+        {
+            // Get all existing predictions by loading predictions for all products
+            _predictions.Clear();
+            
+            // Get all products first
+            var products = await ApiService.GetProductsAsync();
+            
+            // Then get predictions for each product
+            foreach (var product in products)
+            {
+                var productPredictions = await ApiService.GetProductPredictionsAsync(product.Id);
+                _predictions.AddRange(productPredictions);
+            }
+            
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading predictions: {ex.Message}");
+            _predictions = new List<PredictionResult>();
+        }
+    }
+
+    private async Task GeneratePredictions()
+    {
+        _isGenerating = true;
+        StateHasChanged();
+
+        try
+        {
+            var success = await ApiService.GeneratePredictionsAsync();
+            
+            if (success)
+            {
+                await Task.Delay(1000); // Give it time to save
+                await LoadExistingPredictions(); // Reload all predictions
+                await ShowToast("Predictions generated successfully!", "success");
+            }
+            else
+            {
+                await ShowToast("Failed to generate predictions. Please try again.", "error");
+            }
+        }
+        catch (Exception ex)
+        {
+            await ShowToast($"Error: {ex.Message}", "error");
+        }
+
+        _isGenerating = false;
+        StateHasChanged();
+    }
+
+    private async Task OnProductSelectionChanged()
+    {
+        if (_selectedProductId > 0)
+        {
+            _productPredictions = await ApiService.GetProductPredictionsAsync(_selectedProductId);
+            if (_showChart && _productPredictions.Any())
+            {
+                await CreatePredictionChart();
+            }
+        }
+        else
+        {
+            _productPredictions.Clear();
+            if (_predictionChart != null)
+            {
+                await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _predictionChart);
+                _predictionChart = null;
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task OnChartToggle()
+    {
+        if (_showChart && _productPredictions.Any())
+        {
+            await CreatePredictionChart();
+        }
+        else if (_predictionChart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _predictionChart);
+            _predictionChart = null;
+        }
+        StateHasChanged();
+    }
+
+    private async Task CreatePredictionChart()
+    {
+        if (_predictionChart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _predictionChart);
+        }
+
+        await Task.Delay(100);
+
+        var config = new
+        {
+            type = "line",
+            data = new
+            {
+                labels = _productPredictions.Select(p => p.PredictedDate.ToString("MM/dd")).ToArray(),
+                datasets = new object[]
+                {
+                    new
+                    {
+                        label = "Predicted Demand",
+                        data = _productPredictions.Select(p => (object)p.PredictedDemand).ToArray(),
+                        borderColor = "#2563eb",
+                        backgroundColor = "rgba(37, 99, 235, 0.1)",
+                        tension = 0.1,
+                        fill = true
+                    },
+                    new
+                    {
+                        label = "Confidence Level",
+                        data = _productPredictions.Select(p => (object)(p.Confidence * 100)).ToArray(),
+                        borderColor = "#10b981",
+                        backgroundColor = "rgba(16, 185, 129, 0.1)",
+                        tension = 0.1,
+                        yAxisID = "y1"
+                    }
+                }
+            },
+            options = new
+            {
+                responsive = true,
+                maintainAspectRatio = false,
+                scales = new
+                {
+                    y = new
+                    {
+                        position = "left",
+                        title = new { display = true, text = "Predicted Demand" }
+                    },
+                    y1 = new
+                    {
+                        position = "right",
+                        title = new { display = true, text = "Confidence %" },
+                        grid = new { drawOnChartArea = false }
+                    }
+                }
+            }
+        };
+
+        _predictionChart = await JSRuntime.InvokeAsync<IJSObjectReference>("chartHelpers.createChart", "predictionChart", config);
+    }
+
+    private async Task ExportPredictions()
+    {
+        try
+        {
+            var success = await ApiService.ExportPredictionsAsync();
+            if (success)
+            {
+                await ShowToast("Predictions exported successfully!", "success");
+            }
+            else
+            {
+                await ShowToast("Failed to export predictions. Please try again.", "error");
+            }
+        }
+        catch (Exception ex)
+        {
+            await ShowToast($"Export error: {ex.Message}", "error");
+        }
+    }
+
+    private string GetCategoryBadgeClass(string category)
+    {
+        return category switch
+        {
+            "A" => "success",
+            "B" => "warning",
+            _ => "secondary"
+        };
+    }
+
+    private async Task ShowToast(string message, string type)
+    {
+        await JSRuntime.InvokeVoidAsync("showToast", message, type);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_predictionChart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _predictionChart);
+            await _predictionChart.DisposeAsync();
+        }
+    }
+}

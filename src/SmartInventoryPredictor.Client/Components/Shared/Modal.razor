@@ -1,0 +1,64 @@
+﻿@if (IsVisible)
+{
+    <div class="modal-overlay" @onclick="OnOverlayClick">
+        <div class="modal-content" @onclick:stopPropagation="true">
+            <div class="modal-header">
+                <h3 class="modal-title">@Title</h3>
+                <button class="modal-close" @onclick="Hide">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ChildContent
+            </div>
+            @if (ShowFooter)
+            {
+                <div class="modal-footer">
+                    @if (ShowCancelButton)
+                    {
+                        <button class="btn-modern btn-secondary" @onclick="OnCancel">
+                            @CancelText
+                        </button>
+                    }
+                    @if (ShowConfirmButton)
+                    {
+                        <button class="btn-modern @ConfirmButtonClass" @onclick="OnConfirm" disabled="@IsLoading">
+                            @if (IsLoading)
+                            {
+                                <div class="loading-spinner w-4 h-4"></div>
+                            }
+                            @ConfirmText
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public bool ShowFooter { get; set; } = true;
+    [Parameter] public bool ShowCancelButton { get; set; } = true;
+    [Parameter] public bool ShowConfirmButton { get; set; } = true;
+    [Parameter] public string CancelText { get; set; } = "Cancel";
+    [Parameter] public string ConfirmText { get; set; } = "Confirm";
+    [Parameter] public string ConfirmButtonClass { get; set; } = "btn-primary";
+    [Parameter] public bool IsLoading { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback<bool> IsVisibleChanged { get; set; }
+
+    private async Task Hide()
+    {
+        IsVisible = false;
+        await IsVisibleChanged.InvokeAsync(IsVisible);
+    }
+
+    private async Task OnOverlayClick()
+    {
+        await Hide();
+    }
+}

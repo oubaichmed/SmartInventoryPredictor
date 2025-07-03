@@ -1,0 +1,39 @@
+﻿
+<button class="btn btn-outline-secondary btn-sm" @onclick="ToggleTheme" title="Toggle Theme">
+    <i class="fas fa-@(_isDarkTheme ? "sun" : "moon")"></i>
+</button>
+
+@code {
+    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
+
+    private bool _isDarkTheme = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                _isDarkTheme = await JSRuntime.InvokeAsync<bool>("themeManager.getTheme");
+                StateHasChanged();
+            }
+            catch
+            {
+                // Ignore errors during theme initialization
+            }
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        try
+        {
+            _isDarkTheme = await JSRuntime.InvokeAsync<bool>("themeManager.toggleTheme");
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error toggling theme: {ex.Message}");
+        }
+    }
+}

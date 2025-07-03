@@ -1,0 +1,643 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\OUBAICH\\SmartInventoryPredictor\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\pages\\predictions.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\pages\\predictions.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\models\\entities\\predictionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\models\\entities\\predictionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\models\\entities\\predictionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\models\\entities\\predictionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\services\\predictionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\services\\predictionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\ml\\abcanalysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\ml\\abcanalysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\ml\\demandpredictionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\ml\\demandpredictionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\models\\dtos\\dashboarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\models\\dtos\\dashboarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\models\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\models\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\controllers\\predictionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\models\\entities\\saleshistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\models\\entities\\saleshistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\components\\shared\\loadingstate.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\components\\shared\\loadingstate.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\pages\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\pages\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\wwwroot\\js\\chart-helpers.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\wwwroot\\js\\chart-helpers.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\pages\\products.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\pages\\products.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\wwwroot\\js\\ui.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\wwwroot\\js\\ui.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\components\\shared\\alerttoast.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\components\\shared\\alerttoast.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\components\\shared\\modal.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\components\\shared\\modal.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\components\\shared\\productmodal.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\components\\shared\\productmodal.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.client\\pages\\inventory.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B770A98-4010-4E25-B6BC-4BB14966EE0B}|src\\SmartInventoryPredictor.Client\\SmartInventoryPredictor.Client.csproj|solutionrelative:src\\smartinventorypredictor.client\\pages\\inventory.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|d:\\oubaich\\smartinventorypredictor\\src\\smartinventorypredictor.api\\smartinventorypredictor.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{21E70B02-F412-40CD-A3C4-8BBF9AF6E703}|src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj|solutionrelative:src\\smartinventorypredictor.api\\smartinventorypredictor.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 623,
+          "SelectedChildIndex": 22,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PredictionResult.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Models\\Entities\\PredictionResult.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Models\\Entities\\PredictionResult.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Models\\Entities\\PredictionResult.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Models\\Entities\\PredictionResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T15:08:23.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DemandPredictionModel.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\ML\\DemandPredictionModel.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\ML\\DemandPredictionModel.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\ML\\DemandPredictionModel.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\ML\\DemandPredictionModel.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAkwCsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:46:12.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InventoryService.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Services\\InventoryService.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Services\\InventoryService.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Services\\InventoryService.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Services\\InventoryService.cs",
+              "ViewState": "AgIAADQBAAAAAAAAAAAwwD0BAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:43:27.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PredictionsController.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\PredictionsController.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Controllers\\PredictionsController.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\PredictionsController.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Controllers\\PredictionsController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAqwDQAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:29:38.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApiService.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Services\\ApiService.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Services\\ApiService.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Services\\ApiService.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Services\\ApiService.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAArwKgAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:25:40.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DashboardDto.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\DTOs\\DashboardDto.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Models\\DTOs\\DashboardDto.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\DTOs\\DashboardDto.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Models\\DTOs\\DashboardDto.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAACsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:27:26.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductDto.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\DTOs\\ProductDto.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Models\\DTOs\\ProductDto.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\DTOs\\ProductDto.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Models\\DTOs\\ProductDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:27:18.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SalesHistory.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\Entities\\SalesHistory.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Models\\Entities\\SalesHistory.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\Entities\\SalesHistory.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Models\\Entities\\SalesHistory.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:27:10.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\Entities\\Product.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Models\\Entities\\Product.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\Entities\\Product.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Models\\Entities\\Product.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:27:01.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PredictionResult.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\Entities\\PredictionResult.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Models\\Entities\\PredictionResult.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Models\\Entities\\PredictionResult.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Models\\Entities\\PredictionResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T14:26:55.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LoadingState.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\LoadingState.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\LoadingState.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\LoadingState.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\LoadingState.razor",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAwEIAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T13:50:51.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "chart-helpers.js",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\js\\chart-helpers.js",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\wwwroot\\js\\chart-helpers.js",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\js\\chart-helpers.js",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\wwwroot\\js\\chart-helpers.js",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAAwO8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-03T13:50:39.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "app.css",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\css\\app.css",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\wwwroot\\css\\app.css",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\css\\app.css",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\wwwroot\\css\\app.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-03T13:46:02.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "App.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\App.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\App.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\App.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T11:01:41.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ui.js",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\js\\ui.js",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\wwwroot\\js\\ui.js",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\js\\ui.js",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\wwwroot\\js\\ui.js",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAswIQAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-03T11:01:10.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AlertToast.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\AlertToast.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\AlertToast.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\AlertToast.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\AlertToast.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T11:00:33.131Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Modal.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\Modal.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\Modal.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\Modal.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\Modal.razor",
+              "ViewState": "AgIAABEAAAAAAAAAAAAswEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T11:00:04.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ProductModal.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\ProductModal.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\ProductModal.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Shared\\ProductModal.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Components\\Shared\\ProductModal.razor",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAADEAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T10:58:31.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Components\\Layout\\NavMenu.razor",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAwCwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T10:50:07.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Predictions.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Predictions.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Pages\\Predictions.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Predictions.razor \u2B24",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Pages\\Predictions.razor \u2B24",
+              "ViewState": "AgIAAK0BAAAAAAAAAAAiwNkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T10:04:34.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "InventoryController.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\InventoryController.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Controllers\\InventoryController.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\InventoryController.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Controllers\\InventoryController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAIAwwDkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T09:51:03.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T09:33:06.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\wwwroot\\index.html",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\wwwroot\\index.html",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\wwwroot\\index.html",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAUwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-07-03T09:32:10.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Products.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Products.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Pages\\Products.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Products.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Pages\\Products.razor",
+              "ViewState": "AgIAAC0BAAAAAAAAAAAQwEIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-03T09:19:57.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Inventory.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Inventory.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Pages\\Inventory.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Inventory.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Pages\\Inventory.razor",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAcwNgAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-02T17:28:51.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Dashboard.razor",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Dashboard.razor",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Pages\\Dashboard.razor",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Pages\\Dashboard.razor",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Pages\\Dashboard.razor",
+              "ViewState": "AgIAABMCAAAAAAAAAAAQwCgCAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-02T17:12:10.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Program.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.Client\\Program.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.Client\\Program.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.Client\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T17:11:47.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAewBoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-02T17:08:40.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Controllers\\ProductsController.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAOgAAAAAAAAAAAAqwAkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:57:46.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "SmartInventoryPredictor.API.csproj",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\SmartInventoryPredictor.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-02T16:44:35.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\appsettings.json",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\appsettings.json",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-02T16:43:41.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Program.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Program.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAwwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:31:35.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PredictionService.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Services\\PredictionService.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Services\\PredictionService.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Services\\PredictionService.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Services\\PredictionService.cs",
+              "ViewState": "AgIAADABAAAAAAAAAAAAAEIBAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:20:39.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ABCAnalysisModel.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\ML\\ABCAnalysisModel.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\ML\\ABCAnalysisModel.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\ML\\ABCAnalysisModel.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\ML\\ABCAnalysisModel.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAIAwwFkAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:18:33.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "src\\SmartInventoryPredictor.API\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\OUBAICH\\SmartInventoryPredictor\\src\\SmartInventoryPredictor.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "src\\SmartInventoryPredictor.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAGcBAAAAAAAAAAAIwKkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:18:16.218Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 276,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{79664857-03bf-4bca-aa54-ec998b3328f8}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

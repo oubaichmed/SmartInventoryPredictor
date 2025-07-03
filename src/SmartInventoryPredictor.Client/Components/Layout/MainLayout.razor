@@ -1,0 +1,95 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
+<div class="d-flex flex-column min-vh-100" data-theme="@(_isDarkTheme ? "dark" : "light")">
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="bg-primary text-white rounded me-2 p-2">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div>
+                    <div class="fw-semibold">Smart Inventory</div>
+                    <small class="text-muted">AI-Powered Predictor</small>
+                </div>
+            </a>
+
+            <!-- Mobile toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- Navigation will be handled by the sidebar on larger screens -->
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-secondary" @onclick="ToggleTheme">
+                        <i class="fas fa-@(_isDarkTheme ? "sun" : "moon")"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex flex-grow-1">
+        <!-- Sidebar -->
+        <nav class="d-none d-lg-block bg-white border-end" style="width: 250px;">
+            <div class="p-3">
+                <NavMenu />
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-grow-1 bg-light">
+            <div class="container-fluid p-4">
+                @Body
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
+
+@code {
+    private bool _isDarkTheme = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var theme = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
+                _isDarkTheme = theme == "dark";
+                await ApplyTheme();
+                StateHasChanged();
+            }
+            catch { }
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        _isDarkTheme = !_isDarkTheme;
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "theme", _isDarkTheme ? "dark" : "light");
+        await ApplyTheme();
+        StateHasChanged();
+    }
+
+    private async Task ApplyTheme()
+    {
+        if (_isDarkTheme)
+        {
+            await JSRuntime.InvokeVoidAsync("document.documentElement.setAttribute", "data-bs-theme", "dark");
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("document.documentElement.removeAttribute", "data-bs-theme");
+        }
+    }
+}

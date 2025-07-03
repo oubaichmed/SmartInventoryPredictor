@@ -1,0 +1,51 @@
+﻿@inject NavigationManager Navigation
+
+<div class="list-group list-group-flush">
+    <!-- Overview Section -->
+    <div class="px-3 py-2">
+        <small class="text-muted text-uppercase fw-bold">Overview</small>
+    </div>
+
+    <a class="list-group-item list-group-item-action border-0 @GetActiveClass("")" href="/">
+        <i class="fas fa-chart-pie me-2"></i>
+        Dashboard
+    </a>
+
+    <!-- Inventory Section -->
+    <div class="px-3 py-2 mt-3">
+        <small class="text-muted text-uppercase fw-bold">Inventory</small>
+    </div>
+
+    <a class="list-group-item list-group-item-action border-0 @GetActiveClass("products")" href="/products">
+        <i class="fas fa-box me-2"></i>
+        Products
+    </a>
+
+    <a class="list-group-item list-group-item-action border-0 @GetActiveClass("inventory")" href="/inventory">
+        <i class="fas fa-warehouse me-2"></i>
+        Stock Management
+        @if (_lowStockCount > 0)
+        {
+            <span class="badge bg-danger ms-auto">@_lowStockCount</span>
+        }
+    </a>
+
+    <!-- AI & Predictions Section -->
+    <div class="px-3 py-2 mt-3">
+        <small class="text-muted text-uppercase fw-bold">AI & Predictions</small>
+    </div>
+
+    <a class="list-group-item list-group-item-action border-0 @GetActiveClass("predictions")" href="/predictions">
+        <i class="fas fa-brain me-2"></i>
+        Demand Forecast
+    </a>
+</div>
+
+@code {
+    private int _lowStockCount = 5; 
+    private string GetActiveClass(string page)
+    {
+        var currentPage = Navigation.ToBaseRelativePath(Navigation.Uri);
+        return currentPage.StartsWith(page, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    }
+}

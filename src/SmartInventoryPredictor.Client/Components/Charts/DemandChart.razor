@@ -1,0 +1,163 @@
+﻿@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+<div class="chart-container">
+    <canvas id="@ChartId"></canvas>
+</div>
+
+@code {
+    [Parameter] public string ChartId { get; set; } = "demandChart";
+    [Parameter] public List<PredictionResult> Predictions { get; set; } = new();
+    [Parameter] public bool IsDarkTheme { get; set; } = false;
+
+    private IJSObjectReference? _chart;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Predictions.Any())
+        {
+            await CreateChart();
+        }
+    }
+
+    private async Task CreateChart()
+    {
+        if (_chart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _chart);
+        }
+
+        await Task.Delay(100); // Allow DOM to update
+
+        var config = new
+        {
+            type = "line",
+            data = new
+            {
+                labels = Predictions.Select(p => p.PredictedDate.ToString("MM/dd")).ToArray(),
+                datasets = new object[]
+                {
+                    new
+                    {
+                        label = "Predicted Demand",
+                        data = Predictions.Select(p => p.PredictedDemand).ToArray(),
+                        borderColor = IsDarkTheme ? "#34d399" : "#10b981",
+                        backgroundColor = IsDarkTheme ? "rgba(52, 211, 153, 0.1)" : "rgba(16, 185, 129, 0.1)",
+                        tension = 0.4,
+                        fill = true,
+                        pointBackgroundColor = IsDarkTheme ? "#34d399" : "#10b981",
+                        pointBorderColor = IsDarkTheme ? "#ffffff" : "#374151",
+                        pointRadius = 4
+                    },
+                    new
+                    {
+                        label = "Confidence Level",
+                        data = Predictions.Select(p => p.Confidence * 100).ToArray(),
+                        borderColor = IsDarkTheme ? "#fbbf24" : "#f59e0b",
+                        backgroundColor = IsDarkTheme ? "rgba(251, 191, 36, 0.1)" : "rgba(245, 158, 11, 0.1)",
+                        tension = 0.4,
+                        yAxisID = "y1",
+                        pointBackgroundColor = IsDarkTheme ? "#fbbf24" : "#f59e0b",
+                        pointBorderColor = IsDarkTheme ? "#ffffff" : "#374151",
+                        pointRadius = 3
+                    }
+                }
+            },
+            options = new
+            {
+                responsive = true,
+                maintainAspectRatio = false,
+                interaction = new
+                {
+                    mode = "index",
+                    intersect = false
+                },
+                plugins = new
+                {
+                    legend = new
+                    {
+                        labels = new
+                        {
+                            color = IsDarkTheme ? "#ffffff" : "#374151"
+                        }
+                    },
+                    tooltip = new
+                    {
+                        callbacks = new
+                        {
+                            label = "function(context) { if(context.datasetIndex === 0) return 'Demand: ' + context.parsed.y.toFixed(1); else return 'Confidence: ' + context.parsed.y.toFixed(1) + '%'; }"
+                        }
+                    }
+                },
+                scales = new
+                {
+                    x = new
+                    {
+                        grid = new
+                        {
+                            color = IsDarkTheme ? "#374151" : "#e5e7eb"
+                        },
+                        ticks = new
+                        {
+                            color = IsDarkTheme ? "#9ca3af" : "#6b7280"
+                        }
+                    },
+                    y = new
+                    {
+                        type = "linear",
+                        display = true,
+                        position = "left",
+                        title = new
+                        {
+                            display = true,
+                            text = "Predicted Demand",
+                            color = IsDarkTheme ? "#9ca3af" : "#6b7280"
+                        },
+                        grid = new
+                        {
+                            color = IsDarkTheme ? "#374151" : "#e5e7eb"
+                        },
+                        ticks = new
+                        {
+                            color = IsDarkTheme ? "#9ca3af" : "#6b7280"
+                        }
+                    },
+                    y1 = new
+                    {
+                        type = "linear",
+                        display = true,
+                        position = "right",
+                        title = new
+                        {
+                            display = true,
+                            text = "Confidence (%)",
+                            color = IsDarkTheme ? "#9ca3af" : "#6b7280"
+                        },
+                        grid = new
+                        {
+                            drawOnChartArea = false,
+                            color = IsDarkTheme ? "#374151" : "#e5e7eb"
+                        },
+                        ticks = new
+                        {
+                            color = IsDarkTheme ? "#9ca3af" : "#6b7280",
+                            min = 0,
+                            max = 100
+                        }
+                    }
+                }
+            }
+        };
+
+        _chart = await JSRuntime.InvokeAsync<IJSObjectReference>("chartHelpers.createChart", ChartId, config);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_chart != null)
+        {
+            await JSRuntime.InvokeVoidAsync("chartHelpers.destroyChart", _chart);
+            await _chart.DisposeAsync();
+        }
+    }
+}
